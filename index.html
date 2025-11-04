@@ -21,6 +21,7 @@
             --color-accent-purple-light: #a855f7; /* 浅紫色 (用于悬停等) */
             --color-accent-blue: #3b82f6; /* 蓝色点缀 (用于图表) */
             --color-accent-green: #22c55e; /* 绿色点缀 (用于图表) */
+            --color-accent-red: #ff4d4f; /* 红色点缀 (强调关键词) */
             --border-color: #333; /* 边框颜色 */
             --font-title: 'Poppins', sans-serif;
             --font-body: 'Nunito', sans-serif;
@@ -119,6 +120,9 @@
             line-height: 1.6;
             color: var(--color-text-secondary);
         }
+
+        /* 关键词高亮（红色） */
+        .hl-red { color: var(--color-accent-red); }
         
         .slide-container strong {
             color: var(--color-text-primary);
@@ -462,17 +466,21 @@
         .cycle-diagram {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
             width: 100%;
+            gap: 16px;
         }
-        .cycle-diagram h3 { border-bottom: none; text-align: center; }
+        .cycle-diagram h3 { border-bottom: none; text-align: left; }
+        .cycle-body { display: flex; align-items: center; gap: 30px; }
+        .cycle-body .circular-cycle { margin: 0; width: 460px; height: 460px; }
+        .cycle-side-text { flex: 1; font-size: 18px; line-height: 1.6; color: var(--color-text-secondary); }
         
         /* 环形闭环布局 */
         .circular-cycle {
             position: relative;
             width: 500px;
             height: 500px;
-            margin: 40px auto;
+            margin: 40px auto; /* 默认居中；在 .cycle-body 中被覆盖为左侧 */
         }
         
         /* 中心圆环 */
@@ -1043,7 +1051,7 @@
                 </div>
                 <div class="text-content">
                     <h3><i class="fa-solid fa-flag" style="color: var(--color-accent-purple-light); margin-right: 10px;"></i>抢占"AI心智"</h3>
-                    <p>AI依赖早期高质量的"品牌语义资产"。越早布局 = 建立"AI认知先发权" = 越能抢占AI心智。</p>
+                    <p>AI依赖早期高质量的"<span class="hl-red">品牌语义资产</span>"。<span class="hl-red">越早布局</span> = 建立"<span class="hl-red">AI认知先发权</span>" = 越能抢占<span class="hl-red">AI心智</span>。</p>
                     
                     <!-- 图片：GEO趋势图表 -->
                     <div style="width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; margin: 30px 0;">
@@ -1075,19 +1083,19 @@
                 <div>
                     <div class="icon"><i class="fa-solid fa-tags"></i></div>
                     <h3>误解 1：概念滥用</h3>
-                    <p><strong>误解：</strong>把 AI可见性 当作 SEO 换皮，仍在堆砌关键词。</p>
-                    <p><strong>事实：</strong>底层逻辑完全不同。SEO对AI影响有限。</p>
+                    <p><strong>误解：</strong>把 AI可见性 当作 SEO 换皮，仍在<span class="hl-red">堆砌关键词</span>。</p>
+                    <p><strong>事实：</strong>底层逻辑完全不同，SEO对AI决策影响有限。</p>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-database"></i></div>
                     <h3>误解 2：“三无”状态</h3>
                     <p><strong>误解：</strong>缺乏体系、数据、语义的支撑。</p>
-                    <p><strong>事实：</strong>AI可见性的战场在“后端”（数据），而非“前端”（网页）。</p>
+                    <p><strong>事实：</strong>AI可见性的战场在“<span class="hl-red">后端</span>”（数据），而非“前端”（网页）。</p>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-ranking-star"></i></div>
                     <h3>误解 3：短期主义</h3>
-                    <p><strong>误解：</strong>追求短期“排名第一”，而非长期“被AI采纳”。</p>
+                    <p><strong>误解：</strong>追求短期“<span class="hl-red">排名第一</span>”，而非长期“被AI采纳”。</p>
                     <p><strong>事实：</strong>AI会综合对比大量信息，寻求“最佳答案”。</p>
                 </div>
             </div>
@@ -1129,7 +1137,7 @@
             </div>
         </div>
         <div class="highlight-bottom">
-            <p>面对 AI，过去那种“套路”已彻底失效。</p>
+            <p>面对 AI，过去那种“<span class="hl-red">套路</span>”已彻底失效。</p>
         </div>
     </div>
 
@@ -1208,12 +1216,12 @@
             <div class="funnel-layout">
                 <div class="text-content">
                     <h3>定义</h3>
-                    <p>一套以AI技术为核心，面向AI生态的全新”品牌AI可见性优化“服务体系。</p>
+                    <p>一套以<span class="hl-red">AI技术</span>为核心，面向AI生态的全新”<span class="hl-red">品牌AI可见性优化</span>“服务体系。</p>
                     <h3 style="margin-top: 30px;">最终目标</h3>
-                    <p>让AI持续、主动地推荐你的品牌。</p>
+                    <p>让AI<span class="hl-red">持续、主动地</span>推荐你的品牌。</p>
                     
                     <!-- 图片：S-GEO体系架构图 -->
-                    <div style="width: 100%; height: 320px; display: flex; align-items: center; justify-content: center; margin: 30px 0;">
+                    <div style="width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; margin: 30px 0;">
                         <img src="AI推荐官.png" alt="S-GEO体系架构图" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
                     </div>
                 </div>
@@ -1241,10 +1249,10 @@
         <h2 class="slide-title">核心方法论：AI推荐的持续闭环</h2>
         <div class="content-area">
             <div class="cycle-diagram">
-                <h3>AI可见性优化不是一次优化，而是一套持续追踪、智能反馈、动态成长的系统。</h3>
                 
-                <!-- 环形闭环图 -->
-                <div class="circular-cycle">
+                <!-- 环形闭环图 + 右侧说明 -->
+                <div class="cycle-body">
+                    <div class="circular-cycle">
                     <!-- 中心圆环 -->
                     <div class="cycle-center">
                         AI推荐<br>持续闭环
@@ -1261,9 +1269,12 @@
                     <div class="circular-arrow arrow-2"><i class="fa-solid fa-arrow-right"></i></div>
                     <div class="circular-arrow arrow-3"><i class="fa-solid fa-arrow-right"></i></div>
                     <div class="circular-arrow arrow-4"><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                    <div class="cycle-side-text">
+                        <h3>AI可见性优化不是一次优化，而是一套<span class="hl-red">持续追踪、智能反馈、动态成长</span>的系统</h3>
+                        <p>类比：如何让一个大客户（AI）持续信任你，建立“合作”关系，一起为最终客户服务。</p>
+                    </div>
                 </div>
-                
-                <p style="margin-top: 20px; font-size: 18px;">类比：如何让一个大客户（AI）持续信任你，建立“合作”关系，一起为最终客户服务</p>
             </div>
         </div>
     </div>
@@ -1288,7 +1299,7 @@
                 <div class="stage-content">
                     <ul>
                         <li><strong>核心工具：</strong>Seenify (AI可见性追踪与洞察引擎)</li>
-                        <li><strong>目标：</strong>揭开AI推荐的“黑箱”，量化品牌在AI中的可见性。</li>
+                        <li><strong>目标：</strong>揭开AI推荐的“黑箱”，<span class="hl-red">量化品牌在AI中的可见性</span>。</li>
                         <li><strong>产出（示例）：</strong>
                             <ul style="padding-left: 20px; margin-top: 10px;">
                                 <li style="font-size: 20px; color: var(--color-text-secondary);">AI可见性分析报告</li>
@@ -1322,7 +1333,7 @@
                 <div class="stage-content">
                     <ul>
                         <li><strong>目标：</strong>用AI视角定义品牌所处的位置，明确优化重心。</li>
-                        <li><strong>方法：</strong>基于四阶段漏斗模型，评估品牌得分。
+                        <li><strong>方法：</strong>基于四阶段漏斗模型，精确评估品牌得分。
                             <ul style="padding-left: 20px; margin-top: 10px;">
                                 <li style="font-size: 20px; color: var(--color-text-secondary);"><strong>Seen：</strong>是否被收录？</li>
                                 <li style="font-size: 20px; color: var(--color-text-secondary);"><strong>Understood：</strong>核心信息是否准确？</li>
@@ -1355,12 +1366,12 @@
                 </div>
                 <div class="stage-content">
                     <ul>
-                        <li><strong>核心：</strong>优化的不是关键词，而是AI的“理解能力”。</li>
+                        <li><strong>核心：</strong>优化的不是关键词，而是AI的“<span class="hl-red">理解能力</span>”。</li>
                         <li><strong>策略：</strong>制定面向AI（而非人类）的传播策略。</li>
                     </ul>
                     <div class="comparison">
-                        <p><strong>其他服务商：</strong>关键词堆砌、外链建设</p>
-                        <p style="margin-top: 10px;"><strong>我们：</strong><span style="color: var(--color-accent-purple-light)">AI语义结构优化、事实数据库建设、Schema标记</span></p>
+                        <p><strong>其他服务商：</strong>关键词堆砌、外链建设、社交媒体优化</p>
+                        <p style="margin-top: 10px;"><strong>我们：</strong><span style="color: var(--color-accent-purple-light)">AI语义结构优化、网站内容转义、Schema标记</span></p>
                     </div>
                 </div>
             </div>
@@ -1387,7 +1398,7 @@
                 <div class="stage-content">
                     <ul>
                         <li><strong>核心：</strong>内容不只写给人，更是写给AI“阅读”和“引用”。</li>
-                        <li><strong>目标：</strong>自动化生成让AI更容易识别、采信、引用与推荐。</li>
+                        <li><strong>目标：</strong><span class="hl-red">自动化生成</span>让AI更容易<span class="hl-red">理解、采信、引用与推荐。</span></li>
                         <li><strong>AI友好内容矩阵（示例）：</strong>
                             <ul style="padding-left: 20px; margin-top: 10px;">
                                 <li style="font-size: 20px; color: var(--color-text-secondary);">面向LLM的结构化语料 (JSON-LD)</li>
@@ -1425,7 +1436,7 @@
                 <div>
                     <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
                     <h3>专业版 (Creator)</h3>
-                    <p><strong>内容：</strong>Seenify工具Plus + 月报 + 专家辅导</p>
+                    <p><strong>内容：</strong>Seenify工具Plus + 专业报告 + 专家辅导</p>
                     <p style="margin-top: auto; padding-top: 20px;"><strong>适用：</strong>个人品牌、KOL、自媒体</p>
                 </div>
                 <div style="transform: scale(1.05); border: 2px solid var(--color-accent-purple);">
@@ -1529,7 +1540,7 @@
                         <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
                         <div>
                             <h4 style="color: var(--color-text-primary);">实战任务</h4>
-                            <p>导师带领，动手提升品牌AI识别率。</p>
+                            <p>导师带领，动手提升品牌AI可见性。</p>
                         </div>
                     </div>
                     <div>
@@ -1574,28 +1585,28 @@
                     <div class="icon"><i class="fa-solid fa-brain"></i></div>
                     <div>
                         <h3 style="border: none; padding: 0; margin-bottom: 5px;">更懂AI</h3>
-                        <p>技术驱动，团队核心来自AI平台，了解推荐逻辑。</p>
+                        <p>技术驱动，团队拥有多年AI从业经验，了解<span class="hl-red">推荐逻辑</span>。</p>
                     </div>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-chart-pie"></i></div>
                     <div>
                         <h3 style="border: none; padding: 0; margin-bottom: 5px;">更科学</h3>
-                        <p>以数据和语义为依据，不做拍脑袋优化，效果可量化。</p>
+                        <p>以数据和语义为依据，不做<span class="hl-red">拍脑袋优化</span>，效果可量化。</p>
                     </div>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-bolt"></i></div>
                     <div>
                         <h3 style="border: none; padding: 0; margin-bottom: 5px;">更高效</h3>
-                        <p>用AI生成AI友好内容，规模化生产语义资产，降低成本。</p>
+                        <p><span class="hl-red">用AI生成AI友好内容</span>，规模化生产语义资产，降本增效。</p>
                     </div>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-binoculars"></i></div>
                     <div>
                         <h3 style="border: none; padding: 0; margin-bottom: 5px;">更前沿</h3>
-                        <p>实时追踪主流AI算法变化，策略保持动态调整。</p>
+                        <p>实时追踪主流AI算法变化，策略保持<span class="hl-red">动态调整</span>。</p>
                     </div>
                 </div>
             </div>
@@ -1619,7 +1630,7 @@
                 <div>
                     <div class="icon"><i class="fa-solid fa-laptop-code"></i></div>
                     <h3>技术团队</h3>
-                    <p>来自主流AI平台 (百度, 阿里, deepseek)</p>
+                    <p>来自主流AI平台 (deepseek、阿里、百度)</p>
                     <p style="margin-top: 10px;">负责算法与Seenify引擎持续开发。</p>
                 </div>
                 <div>
