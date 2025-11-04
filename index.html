@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>让 AI 成为你的品牌推荐官</title>
+    <!-- 引入科技感的字体: Poppins (标题) 和 Nunito (正文) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. 全局设置 */
+        :root {
+            --bg-dark-primary: #121212; /* 主背景色 */
+            --bg-dark-secondary: #1E1E1E; /* 卡片/幻灯片背景色 */
+            --color-text-primary: #F0F0F0; /* 主文字颜色 */
+            --color-text-secondary: #B3B3B3; /* 次要文字颜色 */
+            --color-accent-purple: #9333ea; /* 紫色点缀 */
+            --color-accent-purple-light: #a855f7; /* 浅紫色 (用于悬停等) */
+            --color-accent-blue: #3b82f6; /* 蓝色点缀 (用于图表) */
+            --color-accent-green: #22c55e; /* 绿色点缀 (用于图表) */
+            --border-color: #333; /* 边框颜色 */
+            --font-title: 'Poppins', sans-serif;
+            --font-body: 'Nunito', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background-color: var(--bg-dark-primary);
+            color: var(--color-text-primary);
+            font-family: var(--font-body);
+            display: grid;
+            gap: 30px;
+            grid-template-columns: 1fr;
+            place-items: center;
+            padding: 30px 0;
+            min-height: 100vh;
+        }
+
+        /* 2. 幻灯片容器 */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--bg-dark-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 20px var(--color-accent-purple-light, 0.1);
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 科技感背景网格 */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.5;
+            z-index: 0;
+        }
+         /* 渐变辉光效果 */
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.1), transparent 30%);
+            z-index: 0;
+        }
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 3. 文本样式 */
+        .slide-title {
+            font-family: var(--font-title);
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 40px;
+            width: 100%;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-accent-purple);
+        }
+
+        .slide-container h1, .slide-container h2, .slide-container h3, .slide-container h4 {
+            font-family: var(--font-title);
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .slide-container h1 { font-size: 64px; line-height: 1.2; }
+        .slide-container h2 { font-size: 36px; }
+        .slide-container h3 { font-size: 26px; color: var(--color-accent-purple-light); margin-bottom: 15px; }
+        .slide-container h4 { font-size: 20px; color: var(--color-text-secondary); }
+
+        .slide-container p, .slide-container li, .slide-container td, .slide-container th {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+        }
+        
+        .slide-container strong {
+            color: var(--color-text-primary);
+            font-weight: 700;
+        }
+
+        .slide-container .subtitle {
+            font-size: 28px;
+            color: var(--color-text-secondary);
+            margin-top: 20px;
+        }
+
+        .slide-container .icon {
+            font-size: 40px;
+            color: var(--color-accent-purple);
+            margin-bottom: 20px;
+        }
+
+        /* 4. 布局助手 */
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 40px;
+        }
+
+        .text-center { text-align: center; }
+        .w-full { width: 100%; }
+        .highlight-box {
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid var(--color-accent-purple);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .highlight-bottom {
+            background: rgba(147, 51, 234, 0.15);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 30px;
+            border: 1px solid var(--color-accent-purple);
+        }
+        .highlight-bottom p {
+            font-size: 24px;
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        /* 线性进阶流程（五步） */
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            width: 100%;
+            align-items: stretch;
+        }
+        .process-flow .data-card {
+            padding: 20px; /* 进一步缩小内边距，保证更宽的有效内容 */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
+        }
+        .process-flow .number {
+            font-size: 52px; /* 缩小数字字号，避免占用过多宽度 */
+        }
+        .process-flow h3 {
+            font-size: 18px;
+        }
+        .process-flow p {
+            font-size: 14px;
+        }
+
+        /* 底部单行总结 */
+        .summary-line {
+            width: 100%;
+            text-align: center;
+            color: var(--color-accent-purple-light);
+            font-size: 16px;
+            white-space: nowrap; /* 强制单行 */
+            overflow: hidden;
+            text-overflow: ellipsis; /* 超出时以省略号处理 */
+            margin-top: 18px;
+        }
+
+        /* 5. 特定布局样式 */
+        
+        /* 封面页 (P-Cover) */
+        .title-layout {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+        .title-layout h1 {
+            color: var(--color-text-primary);
+            font-weight: 700;
+        }
+        .title-layout .key-question {
+            font-size: 24px;
+            margin-top: 40px;
+            max-width: 900px;
+        }
+
+        /* 三栏布局 (P1, P4, P13, P16) */
+        .three-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+        }
+        .three-column-layout > div {
+            background-color: rgba(30, 30, 30, 0.5); /* 半透明卡片 */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .three-column-layout h3 {
+            border-bottom: 2px solid var(--color-accent-purple);
+            padding-bottom: 10px;
+        }
+        .three-column-layout li {
+            margin-left: 20px;
+        }
+
+        /* P2: GEO 演进 */
+        .evolution-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+        }
+        .evolution-layout .timeline {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-family: var(--font-title);
+            font-size: 36px;
+        }
+        .evolution-layout .timeline-arrow {
+            font-size: 40px;
+            color: var(--color-accent-purple);
+        }
+        .evolution-layout .flow-chart {
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            width: 80%;
+            text-align: center;
+        }
+        .flow-chart h3 {
+             border-bottom: none; margin-bottom: 20px;
+        }
+        .flow-chart p {
+            font-size: 24px;
+            font-family: var(--font-body);
+            color: var(--color-text-secondary);
+        }
+         .flow-chart .flow-arrow {
+            font-size: 24px;
+            color: var(--color-accent-purple);
+            margin: 10px 0;
+            display: block;
+        }
+        .flow-chart span {
+            background: rgba(147, 51, 234, 0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: var(--color-text-primary);
+        }
+
+        /* P3: 数据卡片 */
+        .data-card-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .data-card-layout .data-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .data-card {
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+        .data-card .number {
+            font-size: 80px;
+            font-weight: 700;
+            font-family: var(--font-title);
+            color: var(--color-accent-purple);
+        }
+        .data-card p {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+        }
+        .data-card-layout .text-content {
+            padding-top: 20px;
+        }
+
+        /* P5: 强对比 */
+        .contrast-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+        }
+        .contrast-layout > div {
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+        .contrast-layout h3 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid;
+            padding-bottom: 10px;
+        }
+        /* 左侧: 旧 */
+        .contrast-layout .old-battlefield h3 {
+            color: #f87171; /* 红色系 */
+            border-color: #f87171;
+        }
+        /* 右侧: 新 */
+        .contrast-layout .new-battlefield h3 {
+            color: var(--color-accent-purple-light);
+            border-color: var(--color-accent-purple);
+        }
+        .contrast-layout ul {
+            list-style: none;
+            padding-top: 15px;
+        }
+        .contrast-layout li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .contrast-layout li strong {
+            display: inline-block;
+            width: 100px;
+            color: var(--color-text-primary);
+        }
+
+        /* P6: 表格 */
+        .table-layout {
+            width: 100%;
+        }
+        .table-layout table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table-layout th, .table-layout td {
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            text-align: left;
+            color: var(--color-text-secondary);
+            font-size: 18px;
+        }
+        .table-layout th {
+            background-color: #2a2a2a;
+            color: var(--color-text-primary);
+            font-family: var(--font-title);
+            font-size: 18px;
+        }
+        .table-layout tr:nth-child(even) {
+            background-color: rgba(30, 30, 30, 0.5);
+        }
+        .table-layout td:nth-child(3) { /* AI 营销列高亮 */
+            background-color: rgba(147, 51, 234, 0.1);
+        }
+
+        /* P7: 漏斗图 */
+        .funnel-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .funnel-stage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            background-color: var(--color-accent-purple);
+            color: white;
+            font-family: var(--font-title);
+            font-size: 20px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        /* 制作梯形 */
+        .funnel-stage::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+        }
+        .funnel-stage:nth-child(1) { width: 220px; opacity: 1.0; }
+        .funnel-stage:nth-child(1)::before { border-top: 10px solid var(--color-accent-purple); }
+
+        .funnel-stage:nth-child(2) { width: 280px; opacity: 0.9; }
+        .funnel-stage:nth-child(2)::before { border-top: 10px solid var(--color-accent-purple); }
+
+        .funnel-stage:nth-child(3) { width: 340px; opacity: 0.8; }
+        .funnel-stage:nth-child(3)::before { border-top: 10px solid var(--color-accent-purple); }
+
+        .funnel-stage:nth-child(4) { width: 400px; opacity: 0.7; }
+        .funnel-stage:nth-child(4)::before { display: none; } /* 最后一段没有梯形 */
+        
+        .funnel-stage p {
+            color: white;
+            font-size: 18px;
+        }
+
+        /* P8: 循环图 */
+        .cycle-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .cycle-diagram h3 { border-bottom: none; text-align: center; }
+        
+        /* 环形闭环布局 */
+        .circular-cycle {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin: 40px auto;
+        }
+        
+        /* 中心圆环 */
+        .cycle-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 3px solid var(--color-accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(147, 51, 234, 0.1);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-accent-purple);
+            text-align: center;
+        }
+        
+        /* 环形步骤定位 */
+        .cycle-step {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9), rgba(50, 50, 50, 0.8));
+            border: 2px solid var(--color-accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: var(--font-title);
+            font-size: 16px;
+            color: var(--color-text-primary);
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .cycle-step:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.5);
+        }
+        
+        /* 各步骤的位置 - 4步骤布局 */
+        .step-track { top: 20px; left: 50%; transform: translateX(-50%); }
+        .step-diagnose { top: 50%; right: 20px; transform: translateY(-50%); }
+        .step-optimize { bottom: 20px; left: 50%; transform: translateX(-50%); }
+        .step-generate { top: 50%; left: 20px; transform: translateY(-50%); }
+        
+        /* 环形箭头 - 4步骤布局 */
+        .circular-arrow {
+            position: absolute;
+            color: var(--color-accent-purple);
+            font-size: 24px;
+            z-index: 10;
+        }
+        
+        .arrow-1 { top: 60px; right: 80px; transform: rotate(45deg); }
+        .arrow-2 { bottom: 60px; right: 80px; transform: rotate(135deg); }
+        .arrow-3 { bottom: 60px; left: 80px; transform: rotate(225deg); }
+        .arrow-4 { top: 60px; left: 80px; transform: rotate(315deg); }
+        
+        /* 旧样式保留作为备用 */
+        .cycle-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .cycle-arrow {
+            font-size: 30px;
+            color: var(--color-accent-purple);
+        }
+
+        /* P9-P12: 阶段详解 */
+        .stage-detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .stage-icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(147, 51, 234, 0.1);
+            border-radius: 12px;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        .stage-icon-container .icon {
+            font-size: 100px;
+        }
+        .stage-icon-container h2 {
+            font-size: 40px;
+            color: var(--color-text-primary);
+        }
+        .stage-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .stage-content li {
+            font-size: 22px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 35px;
+        }
+        .stage-content li::before {
+            content: '\f00c'; /* check */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--color-accent-purple);
+            position: absolute;
+            left: 0;
+            top: 4px;
+        }
+        .stage-content .comparison {
+            margin-top: 20px;
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        /* P14: 社群服务 */
+        .grid-2x2-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+        }
+        .grid-2x2-layout > div {
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .grid-2x2-layout .icon {
+            font-size: 36px;
+            margin-bottom: 0;
+        }
+
+        /* P17: 成果展示 */
+        .results-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .kpi-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .kpi-card {
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+        .kpi-card .number {
+            font-size: 60px;
+            font-weight: 700;
+            color: var(--color-accent-purple);
+            font-family: var(--font-title);
+        }
+        .kpi-card p {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+        }
+        .chart-placeholder {
+            height: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .chart-placeholder p {
+            font-size: 24px;
+            color: var(--color-text-secondary);
+        }
+        /* 模拟图表 */
+        .chart-bars {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            height: 200px;
+            width: 80%;
+            align-items: flex-end;
+        }
+        .bar {
+            flex-grow: 1;
+            border-radius: 4px 4px 0 0;
+        }
+        .bar-geo { background-color: var(--color-accent-purple); height: 80%; }
+        .bar-seo { background-color: #555; height: 30%; }
+
+
+        /* P18: 结尾页 */
+        .finale-layout {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+        .finale-layout .slogan {
+            font-size: 32px;
+            font-family: var(--font-title);
+            color: var(--color-text-primary);
+            margin-top: 30px;
+        }
+        .finale-layout .cta {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--color-accent-purple-light);
+            margin-top: 20px;
+        }
+        .finale-layout .contact {
+            margin-top: 40px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            font-size: 22px;
+            color: var(--color-text-secondary);
+        }
+        .qr-placeholder {
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #121212;
+            font-size: 14px;
+        }
+
+        品牌标识样式
+        .brand-header {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.9);
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+        
+        .brand-name {
+            font-family: var(--font-title);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .brand-chinese {
+            color: var(--color-text-primary);
+            font-weight: 700;
+        }
+        
+        .brand-separator {
+            color: var(--color-accent);
+            font-weight: 300;
+        }
+        
+        .brand-english {
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+        
+        .brand-name .brand-chinese {
+            color: var(--color-accent-purple);
+        }
+        
+        .brand-name .brand-separator {
+            color: var(--color-text-secondary);
+            margin: 0 8px;
+        }
+        
+        .brand-name .brand-english {
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+        
+        /* 封面页品牌标识 */
+        .cover-brand {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cover-brand .brand-logo {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .cover-brand .brand-name {
+            font-size: 24px;
+        }
+        
+        /* 右上角logo样式 */
+        .slide-logo {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .slide-logo .brand-logo {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .slide-logo .brand-name {
+            font-size: 24px;
+        }
+
+        /* P2A: 从贴海报到培训 */
+        .poster-training-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+        }
+        
+        .poster-training-layout > div {
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .placeholder-box {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(30, 30, 30, 0.3);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+        }
+        
+        .placeholder-box i {
+            font-size: 48px;
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+        
+        .placeholder-box p {
+            font-size: 16px;
+            margin: 0;
+            opacity: 0.8;
+        }
+        
+        .description {
+            font-size: 20px;
+            text-align: center;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+        }
+        
+        .golden-quote {
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(75, 0, 130, 0.1));
+            border: 1px solid var(--color-accent-purple);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .golden-quote p {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-accent-purple);
+            margin: 0;
+            font-family: var(--font-title);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 全局品牌标识
+    <div class="brand-header">
+        <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+        <div class="brand-name">
+            <span class="brand-chinese">犀帆</span>
+            <span class="brand-separator">|</span>
+            <span class="brand-english">Seenify</span>
+        </div>
+    </div> -->
+
+    <!-- 封面页 -->
+    <div class="slide-container" id="slide-cover">
+        <!-- 品牌标识 -->
+        <div class="cover-brand">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        
+        <div class="title-layout">
+            <h1>让 AI 成为你的品牌推荐官</h1>
+            <p class="subtitle">看到你 · 认识你 · 喜欢你 · 推荐你</p>
+            <div class="highlight-box key-question">
+                "AI每天推荐上亿次内容。问题是，你的品牌有在其中出现吗？"
+            </div>
+        </div>
+    </div>
+
+    <!-- P1: 时代背景 -->
+    <div class="slide-container" id="slide-p1">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">AI 正在重塑品牌传播</h2>
+        <div class="content-area">
+            <div class="three-column-layout">
+                <div>
+                    <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3>新的流量入口</h3>
+                    <p>AI推荐系统（如 ChatGPT, Perplexity, 抖音, 头条）已成为用户获取信息的主要渠道。</p>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-user-check"></i></div>
+                    <h3>用户行为转变</h3>
+                    <p>从“主动搜索（Search）”转向“信任AI推荐（Ask & Recommend）”。</p>
+                    
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <h3>品牌的核心焦虑</h3>
+                    <ul>
+                        <li><p>AI“看得到”你吗？ (可见性)</p></li>
+                        <li><p>AI“看得懂”你吗？ (理解度)</p></li>
+                        <li><p>AI“愿意推荐”你吗？ (偏好度)</p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    <!-- P2: 新的竞争：从贴海报到培训AI -->
+    <div class="slide-container" id="slide-p2a">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">新的竞争：从贴海报到培训AI</h2>
+        <div class="content-area">
+            <div class="poster-training-layout">
+                <div class="poster-section">
+                    <div class="image-placeholder">
+                        <img src="贴海报.png" alt="贴海报" class="section-image">
+                    </div>
+                    <p class="description">目标是"被找到"，由品牌方介绍产品。</p>
+                </div>
+                <div class="training-section">
+                    <div class="image-placeholder">
+                        <img src="培训AI.png" alt="培训AI" class="section-image">
+                    </div>
+                    <p class="description">"目标是"精准转述"，由AI介绍产品。</p>
+                </div>
+            </div>
+        </div>
+        <div class="highlight-bottom">
+            <p>在被用户看到前，你需要先被AI"看见"、"理解"、"推荐"。</p>
+        </div>
+    </div>
+
+    <!-- P3: GEO临界点 -->
+    <div class="slide-container" id="slide-p3">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">AI可见性：品牌竞争的新临界点</h2>
+        <div class="content-area">
+            <div class="data-card-layout">
+                <div class="data-cards">
+                    <div class="data-card">
+                        <div class="number">90%</div>
+                        <p>到2027年，90%的消费者入口将被生成式系统主导。<br><strong>(来源：Gartner)</strong></p>
+                    </div>
+                    <div class="data-card">
+                        <div class="number">38%</div>
+                        <p>2024年，超38%的品牌营销预算已包含AI可见性优化。<br><strong>(来源：AdAge)</strong></p>
+                    </div>
+                </div>
+                <div class="text-content">
+                    <h3><i class="fa-solid fa-flag" style="color: var(--color-accent-purple-light); margin-right: 10px;"></i>抢占"AI心智"</h3>
+                    <p>AI依赖早期高质量的"品牌语义资产"。越早布局 = 建立"AI认知先发权" = 越能抢占AI心智。</p>
+                    
+                    <!-- 图片：GEO趋势图表 -->
+                    <div style="width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; margin: 30px 0;">
+                        <img src="心智.png" alt="GEO市场增长趋势图" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+                    </div>
+                    
+                    <div class="highlight-bottom" style="margin-top: 30px;">
+                        <p>AI可见性 正成为品牌的新基础设施。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P4: 行业乱象 -->
+    <div class="slide-container" id="slide-p4">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">行业乱象：对 AI可见性 的普遍误解</h2>
+        <div class="content-area">
+            <div class="three-column-layout">
+                <div>
+                    <div class="icon"><i class="fa-solid fa-tags"></i></div>
+                    <h3>误解 1：概念滥用</h3>
+                    <p><strong>误解：</strong>把 AI可见性 当作 SEO 换皮，仍在堆砌关键词。</p>
+                    <p><strong>事实：</strong>底层逻辑完全不同。SEO对AI影响有限。</p>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>误解 2：“三无”状态</h3>
+                    <p><strong>误解：</strong>缺乏体系、数据、语义的支撑。</p>
+                    <p><strong>事实：</strong>AI可见性的战场在“后端”（数据），而非“前端”（网页）。</p>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-ranking-star"></i></div>
+                    <h3>误解 3：短期主义</h3>
+                    <p><strong>误解：</strong>追求短期“排名第一”，而非长期“被AI采纳”。</p>
+                    <p><strong>事实：</strong>AI会综合对比大量信息，寻求“最佳答案”。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P5: 错误的道路 (对比) -->
+    <div class="slide-container" id="slide-p5">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">两种思维：说服人类 vs 证明给 AI</h2>
+        <div class="content-area">
+            <div class="contrast-layout">
+                <div class="old-battlefield">
+                    <h3><i class="fa-solid fa-users"></i>旧战场 - 传统营销</h3>
+                    <ul>
+                        <li><strong>核心理念：</strong>说服 (Persuade)</li>
+                        <li><strong>沟通对象：</strong>人类（情感、偏见、记忆有限）</li>
+                        <li><strong>核心手段：</strong>创意文案、情感故事、“忽悠”</li>
+                        <li><strong>目标：</strong>抓住人性弱点，打动人。</li>
+                    </ul>
+                </div>
+                <div class="new-battlefield">
+                    <h3><i class="fa-solid fa-robot"></i>新战场 - AI 营销</h3>
+                    <ul>
+                        <li><strong>核心理念：</strong>证明 (Prove)</li>
+                        <li><strong>沟通对象：</strong>AI（逻辑、数据、完美记忆）</li>
+                        <li><strong>核心手段：</strong>结构化数据、可验证事实、API</li>
+                        <li><strong>目标：</strong>成为最优解，说服 AI。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="highlight-bottom">
+            <p>面对 AI，过去那种“套路”已彻底失效。</p>
+        </div>
+    </div>
+
+    <!-- P6: 详细对比表格 -->
+    <div class="slide-container" id="slide-p6">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">详细对比：旧战场 vs. 新战场</h2>
+        <div class="content-area">
+            <div class="table-layout">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>对比维度</th>
+                            <th>传统营销 (旧战场)</th>
+                            <th>AI 营销</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>核心目标</strong></td>
+                            <td>说服 (Persuade)</td>
+                            <td><strong>证明 (Prove)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>沟通对象</strong></td>
+                            <td>人 (易受偏见、情感影响)</td>
+                            <td><strong>AI 模型 (绝对理性、基于数据)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>信任基础</strong></td>
+                            <td>情感共鸣、品牌声誉</td>
+                            <td><strong>数据质量、可验证性</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>关键“语言”</strong></td>
+                            <td>创意文案、视觉冲击</td>
+                            <td><strong>结构化数据 (Schema)、API</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>策略战场</strong></td>
+                            <td>SEO (搜索引擎优化)</td>
+                            <td><strong>生成式引擎优化、AI可见性优化</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>对待“欺骗”</strong></td>
+                            <td>可能短期奏效 (利用信息差)</td>
+                            <td><strong>瞬间识破 (交叉验证并永久记忆)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- P7: S-GEO 体系 -->
+    <div class="slide-container" id="slide-p7">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">Seenify AI可见性优化体系</h2>
+        <div class="content-area">
+            <div class="funnel-layout">
+                <div class="text-content">
+                    <h3>定义</h3>
+                    <p>一套以AI技术为核心，面向AI生态的全新”品牌AI可见性优化“服务体系。</p>
+                    <h3 style="margin-top: 30px;">最终目标</h3>
+                    <p>让AI持续、主动地推荐你的品牌。</p>
+                    
+                    <!-- 图片：S-GEO体系架构图 -->
+                    <div style="width: 100%; height: 320px; display: flex; align-items: center; justify-content: center; margin: 30px 0;">
+                        <img src="AI推荐官.png" alt="S-GEO体系架构图" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+                    </div>
+                </div>
+                <div class="funnel">
+                    <div class="funnel-stage">被推荐 <p style="margin-left: 10px;">- 采纳引用</p></div>
+                    <div class="funnel-stage">被偏好 <p style="margin-left: 10px;">- 竞争优势</p></div>
+                    <div class="funnel-stage">被理解 <p style="margin-left: 10px;">- 语义准确性</p></div>
+                    <div class="funnel-stage">被看到 <p style="margin-left: 10px;">- AI 可见性</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P8: 核心方法论 (闭环) -->
+    <div class="slide-container" id="slide-p8">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">核心方法论：AI推荐的持续闭环</h2>
+        <div class="content-area">
+            <div class="cycle-diagram">
+                <h3>AI可见性优化不是一次优化，而是一套持续追踪、智能反馈、动态成长的系统。</h3>
+                
+                <!-- 环形闭环图 -->
+                <div class="circular-cycle">
+                    <!-- 中心圆环 -->
+                    <div class="cycle-center">
+                        AI推荐<br>持续闭环
+                    </div>
+                    
+                    <!-- 环形步骤 -->
+                    <div class="cycle-step step-track">① 追踪<br>(Track)</div>
+                    <div class="cycle-step step-diagnose">② 诊断<br>(Diagnose)</div>
+                    <div class="cycle-step step-optimize">③ 优化<br>(Optimize)</div>
+                    <div class="cycle-step step-generate">④ 生成<br>(Generate)</div>
+                    
+                    <!-- 环形箭头 -->
+                    <div class="circular-arrow arrow-1"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="circular-arrow arrow-2"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="circular-arrow arrow-3"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="circular-arrow arrow-4"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                
+                <p style="margin-top: 20px; font-size: 18px;">类比：如何让一个大客户（AI）持续信任你，建立“合作”关系，一起为最终客户服务</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- P9: 阶段详解 ①：追踪 -->
+    <div class="slide-container" id="slide-p9">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">阶段详解 ①：追踪 (Track)</h2>
+        <div class="content-area">
+            <div class="stage-detail-layout">
+                <div class="stage-icon-container">
+                    <div class="icon"><img src="追踪.png" alt="追踪" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;"></div>
+                </div>
+                <div class="stage-content">
+                    <ul>
+                        <li><strong>核心工具：</strong>Seenify (AI可见性追踪与洞察引擎)</li>
+                        <li><strong>目标：</strong>揭开AI推荐的“黑箱”，量化品牌在AI中的可见性。</li>
+                        <li><strong>产出（示例）：</strong>
+                            <ul style="padding-left: 20px; margin-top: 10px;">
+                                <li style="font-size: 20px; color: var(--color-text-secondary);">AI可见性分析报告</li>
+                                <li style="font-size: 20px; color: var(--color-text-secondary);">品牌语义认可度报告</li>
+                                <li style="font-size: 20px; color: var(--color-text-secondary);">AI推荐倾向性分析</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P10: 阶段详解 ②：诊断 -->
+    <div class="slide-container" id="slide-p10">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">阶段详解 ②：诊断 (Diagnose)</h2>
+        <div class="content-area">
+            <div class="stage-detail-layout">
+                <div class="stage-icon-container">
+                    <div class="icon"><img src="诊断.png" alt="诊断" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;"></div>
+                </div>
+                <div class="stage-content">
+                    <ul>
+                        <li><strong>目标：</strong>用AI视角定义品牌所处的位置，明确优化重心。</li>
+                        <li><strong>方法：</strong>基于四阶段漏斗模型，评估品牌得分。
+                            <ul style="padding-left: 20px; margin-top: 10px;">
+                                <li style="font-size: 20px; color: var(--color-text-secondary);"><strong>Seen：</strong>是否被收录？</li>
+                                <li style="font-size: 20px; color: var(--color-text-secondary);"><strong>Understood：</strong>核心信息是否准确？</li>
+                                <li style="font-size: 20px; color: var(--color-text-secondary);"><strong>Preferred：</strong>优势是否被AI认可？</li>
+                                <li style="font-size: 20px; color: var(--color-text-secondary);"><strong>Recommended：</strong>是否被推荐？</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P11: 阶段详解 ③：优化 -->
+    <div class="slide-container" id="slide-p11">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">阶段详解 ③：优化 (Optimize)</h2>
+        <div class="content-area">
+            <div class="stage-detail-layout">
+                <div class="stage-icon-container">
+                    <div class="icon"><img src="优化.png" alt="优化" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;"></div>
+                </div>
+                <div class="stage-content">
+                    <ul>
+                        <li><strong>核心：</strong>优化的不是关键词，而是AI的“理解能力”。</li>
+                        <li><strong>策略：</strong>制定面向AI（而非人类）的传播策略。</li>
+                    </ul>
+                    <div class="comparison">
+                        <p><strong>其他服务商：</strong>关键词堆砌、外链建设</p>
+                        <p style="margin-top: 10px;"><strong>我们：</strong><span style="color: var(--color-accent-purple-light)">AI语义结构优化、事实数据库建设、Schema标记</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P12: 阶段详解 ④：生成 -->
+    <div class="slide-container" id="slide-p12">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">阶段详解 ④：生成 (Generate)</h2>
+        <div class="content-area">
+            <div class="stage-detail-layout">
+                <div class="stage-icon-container">
+                    <div class="icon"><img src="生成.png" alt="生成" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;"></div>
+                </div>
+                <div class="stage-content">
+                    <ul>
+                        <li><strong>核心：</strong>内容不只写给人，更是写给AI“阅读”和“引用”。</li>
+                        <li><strong>目标：</strong>自动化生成让AI更容易识别、采信、引用与推荐。</li>
+                        <li><strong>AI友好内容矩阵（示例）：</strong>
+                            <ul style="padding-left: 20px; margin-top: 10px;">
+                                <li style="font-size: 20px; color: var(--color-text-secondary);">面向LLM的结构化语料 (JSON-LD)</li>
+                                <li style="font-size: 20px; color: var(--color-text-secondary);">面向问答系统的精确引用模板</li>
+                                <li style="font-size: 20px; color: var(--color-text-secondary);">面向Agent网络的品牌事实库</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P13: 服务体系总览 -->
+    <div class="slide-container" id="slide-p13">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">服务体系总览</h2>
+        <div class="content-area">
+            <div class="three-column-layout">
+                <div>
+                    <div class="icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>学习版 (Community)</h3>
+                    <p><strong>内容：</strong>Seenify工具基础版 + 公开课 + 社群</p>
+                    <p style="margin-top: auto; padding-top: 20px;"><strong>适用：</strong>想了解GEO的从业者、品牌主</p>
+                </div>
+                <!-- 专业版高亮 -->
+                <div>
+                    <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
+                    <h3>专业版 (Creator)</h3>
+                    <p><strong>内容：</strong>Seenify工具Plus + 月报 + 专家辅导</p>
+                    <p style="margin-top: auto; padding-top: 20px;"><strong>适用：</strong>个人品牌、KOL、自媒体</p>
+                </div>
+                <div style="transform: scale(1.05); border: 2px solid var(--color-accent-purple);">
+                    <div class="icon"><i class="fa-solid fa-building"></i></div>
+                    <h3>企业版 (Enterprise)</h3>
+                    <p><strong>内容：</strong>全流程服务 + 定制内容矩阵 + 保障最终效果</p>
+                    <p style="margin-top: auto; padding-top: 20px;"><strong>适用：</strong>品牌方、机构客户</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P13.1: AI品牌可见性优化服务流程 -->
+    <div class="slide-container" id="slide-p13-flow">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">AI可见性优化服务流程</h2>
+        <div class="content-area">
+            <!-- 线性进阶流程（5步） -->
+            <div class="process-flow">
+                <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="number">1</div>
+                    <h3>🔬 AI品牌可见性深度诊断</h3>
+                    <p><strong>现状定位：</strong>评估品牌知识现状、AI问答表现、竞品差距，确定优化基线。</p>
+                    <div style="margin-top: auto; padding-top: 6px;">
+                        <span class="emphasis" style="background-color: rgba(99,102,241,0.15); padding: 6px 10px; border-radius: 6px;">诊断报告</span>
+                    </div>
+                </div>
+                <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="number">2</div>
+                    <h3>💡 AI语义提示词策略制定</h3>
+                    <p><strong>蓝图设计：</strong>基于品牌价值、目标受众和主词，设计10~15个相关提示词。</p>
+                    <div style="margin-top: auto; padding-top: 6px;">
+                        <span class="emphasis" style="background-color: rgba(99,102,241,0.15); padding: 6px 10px; border-radius: 6px;">策略文档</span>
+                    </div>
+                </div>
+                <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="number">3</div>
+                    <h3>🤝 交付条件确认与合同签订</h3>
+                    <p><strong>共识确立：</strong>明确优化目标、交付内容、时间表和验收标准，正式启动合作。</p>
+                    <div style="margin-top: auto; padding-top: 6px;">
+                        <span class="emphasis" style="background-color: rgba(99,102,241,0.15); padding: 6px 10px; border-radius: 6px;">合作启动</span>
+                    </div>
+                </div>
+                <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="number">4</div>
+                    <h3>⚙️ 优化策略执行与智能迭代</h3>
+                    <p><strong>高效赋能：</strong>内容生成、渠道分发并根据实时反馈进行持续优化。</p>
+                    <div style="margin-top: auto; padding-top: 6px;">
+                        <span class="emphasis" style="background-color: rgba(99,102,241,0.15); padding: 6px 10px; border-radius: 6px;">实时数据</span>
+                    </div>
+                </div>
+                <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="number">5</div>
+                    <h3>✅ 成果交付与可见性固化</h3>
+                    <p><strong>价值锁定：</strong>提交优化成果报告，确保品牌按约定在主流AI平台呈现。</p>
+                    <div style="margin-top: auto; padding-top: 6px;">
+                        <span class="emphasis" style="background-color: rgba(99,102,241,0.15); padding: 6px 10px; border-radius: 6px;">可见性固化</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部单行总结 -->
+            <!-- <p class="summary-line">这是一个从“知己知彼”到“言行一致”的专业旅程。我们不仅提升可见性，更确保 AI 为您精准代言。</p> -->
+        </div>
+    </div>
+
+    <!-- P14: 社群服务 -->
+    <div class="slide-container" id="slide-p14">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">犀帆公益学习社群</h2>
+        <div class="content-area" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+            <!-- 左侧内容区域 -->
+            <div style="display: flex; flex-direction: column;">
+                <p class="subtitle" style="margin-top: 0; margin-bottom: 30px; color: var(--color-accent-purple-light);">"懂AI，才能被AI推荐。"</p>
+                
+                <div class="grid-2x2-layout">
+                    <div>
+                        <div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <div>
+                            <h4 style="color: var(--color-text-primary);">GEO公开课</h4>
+                            <p>深入讲解AI推荐的底层逻辑。</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <div>
+                            <h4 style="color: var(--color-text-primary);">实战任务</h4>
+                            <p>导师带领，动手提升品牌AI识别率。</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="icon"><i class="fa-solid fa-user-group"></i></div>
+                        <div>
+                            <h4 style="color: var(--color-text-primary);">专家圆桌</h4>
+                            <p>对话AI平台在职工程师。</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="icon"><i class="fa-solid fa-gift"></i></div>
+                        <div>
+                            <h4 style="color: var(--color-text-primary);">内测权益</h4>
+                            <p>优先试用Seenify新功能。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧图片区域 -->
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                <img src="社群.png" alt="GEO学习成长路径图" style="max-width: 100%; max-height: 400px; object-fit: contain; border-radius: 12px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- P15: 我们的优势 -->
+    <div class="slide-container" id="slide-p15">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">为什么选择我们？</h2>
+        <div class="content-area">
+             <div class="grid-2x2-layout">
+                <div>
+                    <div class="icon"><i class="fa-solid fa-brain"></i></div>
+                    <div>
+                        <h3 style="border: none; padding: 0; margin-bottom: 5px;">更懂AI</h3>
+                        <p>技术驱动，团队核心来自AI平台，了解推荐逻辑。</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div>
+                        <h3 style="border: none; padding: 0; margin-bottom: 5px;">更科学</h3>
+                        <p>以数据和语义为依据，不做拍脑袋优化，效果可量化。</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div>
+                        <h3 style="border: none; padding: 0; margin-bottom: 5px;">更高效</h3>
+                        <p>用AI生成AI友好内容，规模化生产语义资产，降低成本。</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-binoculars"></i></div>
+                    <div>
+                        <h3 style="border: none; padding: 0; margin-bottom: 5px;">更前沿</h3>
+                        <p>实时追踪主流AI算法变化，策略保持动态调整。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P16: 核心团队 -->
+    <div class="slide-container" id="slide-p16">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">我们的团队</h2>
+        <div class="content-area">
+            <div class="three-column-layout">
+                <div>
+                    <div class="icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3>技术团队</h3>
+                    <p>来自主流AI平台 (百度, 阿里, deepseek)</p>
+                    <p style="margin-top: 10px;">负责算法与Seenify引擎持续开发。</p>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h3>GEO专家</h3>
+                    <p>资深SEO/ASO顾问 + AI语义策略专家</p>
+                    <p style="margin-top: 10px;">负责策略制定与优化执行。</p>
+                </div>
+                <div>
+                    <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
+                    <h3>顾问阵容</h3>
+                    <p>行业在职AI产品经理 + 工程师 + 知名品牌增长顾问</p>
+                    <p style="margin-top: 10px;">负责链接业务与前沿趋势。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+                  
+
+    <!-- P18: 结尾页 -->
+    <div class="slide-container" id="slide-p18">
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <div class="finale-layout">
+            <h2 style="font-size: 32px;">AI推荐时代已经到来。</h2>
+            <p class="slogan highlight-box">真正被推荐的，不是广告，而是“被AI理解的品牌”。</p>
+            <p class="cta">让AI成为你的品牌推荐官。</p>
+            <div class="contact">
+                <div>
+                    <p>business@seenify.cn</p>
+                    <p>www.seenify.cn</p>
+                    <p style="font-size: 40px; font-weight: 700; margin-top: 10px;">Q&A</p>
+                </div>
+                <div class="qr-placeholder">
+                    <img src="公众号.png" alt="公众号二维码" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
