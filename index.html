@@ -189,11 +189,19 @@
             gap: 10px;
             height: 100%;
         }
+        /* 流程卡片重要节点高亮 */
+        .process-flow .data-card.important {
+            border: 2px solid var(--color-accent-red);
+            box-shadow: 0 0 18px rgba(255, 77, 79, 0.25);
+            background: linear-gradient(180deg, rgba(255,77,79,0.08), rgba(30,30,30,0.5));
+        }
+        .process-flow .data-card.important h3 { color: var(--color-accent-red); }
+        .process-flow .data-card.important .number { color: var(--color-accent-red); }
         .process-flow .number {
             font-size: 52px; /* 缩小数字字号，避免占用过多宽度 */
         }
         .process-flow h3 {
-            font-size: 18px;
+            font-size: 20px; /* 调大流程标题字号 */
         }
         .process-flow p {
             font-size: 14px;
@@ -322,7 +330,7 @@
             padding: 30px;
         }
         .data-card .number {
-            font-size: 80px;
+            font-size: 50px;
             font-weight: 700;
             font-family: var(--font-title);
             color: var(--color-accent-purple);
@@ -856,7 +864,7 @@
         
         .image-placeholder {
             width: 100%;
-            height: 300px;
+            height: 320px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -864,8 +872,8 @@
         }
         
         .section-image {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 110%;
+            max-height: 110%;
             object-fit: contain;
             border-radius: 8px;
         }
@@ -1010,18 +1018,18 @@
                     <div class="image-placeholder">
                         <img src="贴海报.png" alt="贴海报" class="section-image">
                     </div>
-                    <p class="description">目标是"被找到"，由品牌方介绍产品。</p>
+                    <p class="description">目标是<span class="hl-red">"被找到"</span>，由<span class="hl-red">品牌方</span>介绍产品。</p>
                 </div>
                 <div class="training-section">
                     <div class="image-placeholder">
                         <img src="培训AI.png" alt="培训AI" class="section-image">
                     </div>
-                    <p class="description">"目标是"精准转述"，由AI介绍产品。</p>
+                    <p class="description">目标是<span class="hl-red">"精准转述"</span>，由<span class="hl-red">AI</span>介绍产品。</p>
                 </div>
             </div>
         </div>
         <div class="highlight-bottom">
-            <p>在被用户看到前，你需要先被AI"看见"、"理解"、"推荐"。</p>
+            <p>在被用户看到前，你需要先被AI"<strong>看见</strong>"、"<strong>理解</strong>"、"<strong>推荐</strong>"。</p>
         </div>
     </div>
 
@@ -1083,20 +1091,20 @@
                 <div>
                     <div class="icon"><i class="fa-solid fa-tags"></i></div>
                     <h3>误解 1：概念滥用</h3>
-                    <p><strong>误解：</strong>把 AI可见性 当作 SEO 换皮，仍在<span class="hl-red">堆砌关键词</span>。</p>
-                    <p><strong>事实：</strong>底层逻辑完全不同，SEO对AI决策影响有限。</p>
+                    <p><strong>❌误解：</strong>把 AI可见性 当作 SEO 换皮，仍在<span class="hl-red">堆砌关键词</span>。</p>
+                    <p><strong>✅事实：</strong>底层逻辑完全不同，SEO对AI决策影响有限。</p>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-database"></i></div>
                     <h3>误解 2：“三无”状态</h3>
-                    <p><strong>误解：</strong>缺乏体系、数据、语义的支撑。</p>
-                    <p><strong>事实：</strong>AI可见性的战场在“<span class="hl-red">后端</span>”（数据），而非“前端”（网页）。</p>
+                    <p><strong>❌误解：</strong>缺乏体系、数据、语义的支撑。</p>
+                    <p><strong>✅事实：</strong>AI可见性战场在“<span class="hl-red">后端</span>”（数据），而不仅仅在“前端”（网页）。</p>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-ranking-star"></i></div>
                     <h3>误解 3：短期主义</h3>
-                    <p><strong>误解：</strong>追求短期“<span class="hl-red">排名第一</span>”，而非长期“被AI采纳”。</p>
-                    <p><strong>事实：</strong>AI会综合对比大量信息，寻求“最佳答案”。</p>
+                    <p><strong>❌误解：</strong>追求短期“<span class="hl-red">排名第一</span>”，而非长期“被AI采纳”。</p>
+                    <p><strong>✅事实：</strong>AI会综合对比大量信息，寻求“最佳答案”。</p>
                 </div>
             </div>
         </div>
@@ -1465,7 +1473,6 @@
             <!-- 线性进阶流程（5步） -->
             <div class="process-flow">
                 <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div class="number">1</div>
                     <h3>🔬 AI品牌可见性深度诊断</h3>
                     <p><strong>现状定位：</strong>评估品牌知识现状、AI问答表现、竞品差距，确定优化基线。</p>
                     <div style="margin-top: auto; padding-top: 6px;">
@@ -1473,15 +1480,13 @@
                     </div>
                 </div>
                 <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div class="number">2</div>
                     <h3>💡 AI语义提示词策略制定</h3>
-                    <p><strong>蓝图设计：</strong>基于品牌价值、目标受众和主词，设计10~15个相关提示词。</p>
+                    <p><strong>蓝图设计：</strong>基于品牌价值、目标受众和主词，设计品牌提示词策略。</p>
                     <div style="margin-top: auto; padding-top: 6px;">
                         <span class="emphasis" style="background-color: rgba(99,102,241,0.15); padding: 6px 10px; border-radius: 6px;">策略文档</span>
                     </div>
                 </div>
-                <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div class="number">3</div>
+                <div class="data-card important" style="display: flex; flex-direction: column; gap: 12px;">
                     <h3>🤝 交付条件确认与合同签订</h3>
                     <p><strong>共识确立：</strong>明确优化目标、交付内容、时间表和验收标准，正式启动合作。</p>
                     <div style="margin-top: auto; padding-top: 6px;">
@@ -1489,7 +1494,6 @@
                     </div>
                 </div>
                 <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div class="number">4</div>
                     <h3>⚙️ 优化策略执行与智能迭代</h3>
                     <p><strong>高效赋能：</strong>内容生成、渠道分发并根据实时反馈进行持续优化。</p>
                     <div style="margin-top: auto; padding-top: 6px;">
@@ -1497,7 +1501,6 @@
                     </div>
                 </div>
                 <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div class="number">5</div>
                     <h3>✅ 成果交付与可见性固化</h3>
                     <p><strong>价值锁定：</strong>提交优化成果报告，确保品牌按约定在主流AI平台呈现。</p>
                     <div style="margin-top: auto; padding-top: 6px;">
