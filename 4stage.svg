@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 180" width="100%" height="auto" role="img" aria-labelledby="title desc">
+  <title id="title">AI推荐四阶段：看见 → 理解 → 偏好 → 推荐</title>
+  <desc id="desc">四个斜切卡片依次排列，中间以小箭头连接，分别为看见、理解、偏好、推荐。</desc>
+
+  <defs>
+    <linearGradient id="grad-recommend" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF8BB0"/>
+      <stop offset="100%" stop-color="#FF6B86"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#9B78E9" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      .card-stroke { fill: #FFFFFF; stroke: #9B78E9; stroke-width: 6; filter: url(#shadow); }
+      .card-fill   { fill: #FFFFFF; }
+      .label       { font-family: "PingFang SC", "Noto Sans SC", system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 36px; fill: #222; }
+      .arrow       { fill: #FFFFFF; stroke: #9B78E9; stroke-width: 5; filter: url(#shadow); }
+    </style>
+  </defs>
+
+  <!-- 看见 -->
+  <g transform="translate(50,45) skewX(-12)">
+    <rect class="card-stroke" x="0" y="0" width="180" height="90" rx="16"/>
+    <rect x="8" y="8" width="164" height="74" rx="12" fill="#DDF7B0"/>
+    <g transform="skewX(12)">
+      <text class="label" x="80" y="60" text-anchor="middle">看见</text>
+    </g>
+  </g>
+
+  
+
+  <!-- 理解 -->
+  <g transform="translate(300,45) skewX(-12)">
+    <rect class="card-stroke" x="0" y="0" width="180" height="90" rx="16"/>
+    <rect x="8" y="8" width="164" height="74" rx="12" fill="#FFE373"/>
+    <g transform="skewX(12)">
+      <text class="label" x="80" y="60" text-anchor="middle">理解</text>
+    </g>
+  </g>
+
+  
+
+  <!-- 偏好 -->
+  <g transform="translate(550,45) skewX(-12)">
+    <rect class="card-stroke" x="0" y="0" width="180" height="90" rx="16"/>
+    <rect x="8" y="8" width="164" height="74" rx="12" fill="#FFB34D"/>
+    <g transform="skewX(12)">
+      <text class="label" x="80" y="60" text-anchor="middle">偏好</text>
+    </g>
+  </g>
+
+  
+
+  <!-- 推荐 -->
+  <g transform="translate(800,45) skewX(-12)">
+    <rect class="card-stroke" x="0" y="0" width="180" height="90" rx="16"/>
+    <rect x="8" y="8" width="164" height="74" rx="12" fill="url(#grad-recommend)"/>
+    <g transform="skewX(12)">
+      <text class="label" x="80" y="60" text-anchor="middle">推荐</text>
+    </g>
+  </g>
+  
+  <!-- Arrows on top -->
+  <g id="arrows-top">
+    <polygon class="arrow" points="245,75 270,90 245,105"/>
+    <polygon class="arrow" points="495,75 520,90 495,105"/>
+    <polygon class="arrow" points="745,75 770,90 745,105"/>
+  </g>
+</svg>

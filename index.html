@@ -45,7 +45,6 @@
             padding: 0;
         }
 
-        html,
         body {
             background-color: var(--bg-dark-primary);
             color: var(--color-text-primary);
@@ -845,6 +844,45 @@
             margin-bottom: 0;
         }
 
+        /* Case: 案例左右布局 */
+        .case-layout {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+        }
+        .case-text {
+            flex: 1 1 55%;
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+        .case-text h3 {
+            border-bottom: 2px solid var(--color-accent-purple);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        .case-text ul {
+            margin-left: 20px;
+        }
+        .case-image {
+            flex: 1 1 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .case-image img {
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
         /* P17: 成果展示 */
         .results-layout {
             display: grid;
@@ -1244,15 +1282,6 @@
 </head>
 
 <body>
-    <!-- 全局品牌标识
-    <div class="brand-header">
-        <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
-        <div class="brand-name">
-            <span class="brand-chinese">犀帆</span>
-            <span class="brand-separator">|</span>
-            <span class="brand-english">Seenify</span>
-        </div>
-    </div> -->
 
     <!-- 封面页 -->
     <div class="slide-container" id="slide-cover">
@@ -1298,7 +1327,7 @@
                     <p>杭州念响科技有限公司（Nianxiang Tech）成立于2019年，是一家专注于AI时代品牌数字资产建设与优化的高新技术企业。</p>
                     <p>我们深刻理解，在生成式AI浪潮下，品牌与消费者的沟通方式正在被彻底重塑。我们不只是传统的营销和科技公司，更是精通AI“语言”的技术伙伴。我们的核心使命是利用前沿的AI技术和数据策略，帮助品牌在复杂的AI生态中被“看见”、被“理解”、被“偏好”，并最终被“推荐”。
                     </p>
-                    <img src="4stage.png" alt="四阶段示意图"
+<img src="4stage.svg" alt="四阶段示意图"
                         style="width: 100%; height: 180px; object-fit: contain; margin-top: 6px; display: block;">
                 </div>
                 <div class="highlight-box" style="background: transparent;border: none;">
@@ -1340,7 +1369,7 @@
                             </li>
                             <li style="padding-left: 16px; margin: 16px 0;">
                                 <div style="font-weight: 700;">2024 聚焦</div>
-                                <div style="margin-top: 4px; color: #fff;">GEO 元年，专注AI可见性分析研究，为品牌提供 AI 营销解决方案</div>
+                                <div style="margin-top: 4px; color: #fff;">全球GEO元年，专注AI可见性分析研究，为品牌提供 AI 营销解决方案</div>
                             </li>
                             <li style="padding-left: 16px; margin: 16px 0;">
                                 <div style="font-weight: 700;">2025 至今 引领</div>
@@ -1452,27 +1481,27 @@
                 <span class="brand-english">Seenify</span>
             </div>
         </div>
-        <h2 class="slide-title">新的竞争：从贴海报到培训AI</h2>
+        <h2 class="slide-title">新的营销手段：贴海报->培训AI</h2>
         <div class="content-area">
             <div class="poster-training-layout">
                 <div class="poster-section">
                     <div class="image-placeholder">
                         <img src="贴海报.png" alt="贴海报" class="section-image">
                     </div>
-                    <p class="description">目标是<span class="hl-red">"被找到"</span>，由<span class="hl-red">品牌方</span>介绍产品。
+                    <p class="description">传统：目标是<span class="hl-red">"被找到"</span>，由<span class="hl-red">品牌方</span>直接介绍产品。
                     </p>
                 </div>
                 <div class="training-section">
                     <div class="image-placeholder">
                         <img src="培训AI.png" alt="培训AI" class="section-image">
                     </div>
-                    <p class="description">目标是<span class="hl-red">"精准转述"</span>，由<span class="hl-red">AI</span>介绍产品。
+                    <p class="description">当前：目标是<span class="hl-red">"精准转述"</span>，由<span class="hl-red">AI</span>间接介绍产品。
                     </p>
                 </div>
             </div>
         </div>
         <div class="highlight-bottom">
-            <p>在被用户看到前，你需要先被AI"<strong>看见</strong>"、"<strong>理解</strong>"、"<strong>推荐</strong>"。</p>
+            <p>在被用户看到前，你需要先被AI"<strong>看见</strong>"、"<strong>理解</strong>"、"<strong>偏好</strong>"。</p>
         </div>
     </div>
 
@@ -1553,24 +1582,24 @@
                 <span class="brand-english">Seenify</span>
             </div>
         </div>
-        <h2 class="slide-title">行业乱象：对 AI可见性 的普遍误解</h2>
+        <h2 class="slide-title">行业乱象：对 AI可见性 的理解误区</h2>
         <div class="content-area">
             <div class="three-column-layout">
                 <div>
                     <div class="icon"><i class="fa-solid fa-tags"></i></div>
-                    <h3>误解 1：概念滥用</h3>
+                    <h3>误区 1：概念滥用</h3>
                     <p><strong>❌误解：</strong>把 AI可见性 当作 SEO 换皮，仍在<span class="hl-red">堆砌关键词</span>。</p>
                     <p><strong>✅事实：</strong>底层逻辑完全不同，SEO对AI决策影响有限。</p>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-database"></i></div>
-                    <h3>误解 2：“三无”状态</h3>
-                    <p><strong>❌误解：</strong>缺乏体系、数据、语义的支撑。</p>
+                    <h3>误区 2：“三无”状态</h3>
+                    <p><strong>❌误解：</strong>发海量内容，缺乏体系、数据、语义的支撑。</p>
                     <p><strong>✅事实：</strong>AI可见性战场在“<span class="hl-red">后端</span>”（数据），而不仅仅在“前端”（网页）。</p>
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-ranking-star"></i></div>
-                    <h3>误解 3：短期主义</h3>
+                    <h3>误区 3：短期主义</h3>
                     <p><strong>❌误解：</strong>追求短期“<span class="hl-red">排名第一</span>”，而非长期“被AI采纳”。</p>
                     <p><strong>✅事实：</strong>AI会综合对比大量信息，寻求“最佳答案”。</p>
                 </div>
@@ -1590,7 +1619,7 @@
                 <span class="brand-english">Seenify</span>
             </div>
         </div>
-        <h2 class="slide-title">两种思维：说服人类 vs 证明给 AI</h2>
+        <h2 class="slide-title">底层思维不同：说服人类 vs 证明给 AI</h2>
         <div class="content-area">
             <div class="contrast-layout">
                 <div class="old-battlefield">
@@ -1618,66 +1647,6 @@
         </div>
     </div>
 
-    <!-- P6: 详细对比表格 -->
-    <div class="slide-container" id="slide-p6">
-        <div class="slide-bg"></div>
-        <!-- 右上角logo -->
-        <div class="slide-logo">
-            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
-            <div class="brand-name">
-                <span class="brand-chinese">犀帆</span>
-                <span class="brand-separator">|</span>
-                <span class="brand-english">Seenify</span>
-            </div>
-        </div>
-        <h2 class="slide-title">详细对比：旧战场 vs. 新战场</h2>
-        <div class="content-area">
-            <div class="table-layout">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>对比维度</th>
-                            <th>传统营销 (旧战场)</th>
-                            <th>AI 营销</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>核心目标</strong></td>
-                            <td>说服 (Persuade)</td>
-                            <td><strong>证明 (Prove)</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>沟通对象</strong></td>
-                            <td>人 (易受偏见、情感影响)</td>
-                            <td><strong>AI 模型 (绝对理性、基于数据)</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>信任基础</strong></td>
-                            <td>情感共鸣、品牌声誉</td>
-                            <td><strong>数据质量、可验证性</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>关键“语言”</strong></td>
-                            <td>创意文案、视觉冲击</td>
-                            <td><strong>结构化数据 (Schema)、API</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>策略战场</strong></td>
-                            <td>SEO (搜索引擎优化)</td>
-                            <td><strong>生成式引擎优化、AI可见性优化</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>对待“欺骗”</strong></td>
-                            <td>可能短期奏效 (利用信息差)</td>
-                            <td><strong>瞬间识破 (交叉验证并永久记忆)</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
     <!-- CH3: 犀帆服务体系 (章节页) -->
     <div class="slide-container" id="slide-ch3">
         <div class="slide-bg"></div>
@@ -1692,7 +1661,7 @@
         </div>
         <div class="chapter-layout">
             <h2 class="chapter-title">三、犀帆服务体系</h2>
-            <p class="chapter-subtitle">专业服务体系</p>
+            <p class="chapter-subtitle">一站式服务体系</p>
         </div>
         <div class="slide-footer"><span>Seenify</span><span>•</span><span>www.seenify.cn</span></div>
     </div>
@@ -1781,7 +1750,7 @@
                     </div>
                     <div class="cycle-side-text">
                         <h3>AI可见性优化不是一次优化，而是一套<span class="hl-red">持续追踪、智能反馈、动态成长</span>的系统</h3>
-                        <p>类比：如何让一个大客户（AI）持续信任你，建立“合作”关系，一起为最终客户服务。</p>
+                        <p>我们要持续经营跟AI的关系，从而和AI建立“合作”关系，一起为最终客户服务。</p>
                     </div>
                 </div>
             </div>
@@ -1809,9 +1778,9 @@
                 </div>
                 <div class="stage-content">
                     <ul>
-                        <li><strong>核心工具：</strong>Seenify (AI可见性追踪与洞察引擎)</li>
+                        <li><strong>核心工具：</strong>Seenify (首款AI可见性追踪与洞察引擎)</li>
                         <li><strong>目标：</strong>揭开AI推荐的“黑箱”，<span class="hl-red">量化品牌在AI中的可见性</span>。</li>
-                        <li><strong>产出（示例）：</strong>
+                        <li><strong>产出（部分）：</strong>
                             <ul style="padding-left: 20px; margin-top: 10px;">
                                 <li style="font-size: 20px; color: var(--color-text-secondary);">AI可见性分析报告</li>
                                 <li style="font-size: 20px; color: var(--color-text-secondary);">品牌语义认可度报告</li>
@@ -1889,7 +1858,7 @@
                 </div>
                 <div class="stage-content">
                     <ul>
-                        <li><strong>核心：</strong>优化的不是关键词，而是AI的“<span class="hl-red">理解能力</span>”。</li>
+                        <li><strong>核心：</strong>根据诊断结果优化，优化的不是关键词，而是AI的“<span class="hl-red">理解能力</span>”。</li>
                         <li><strong>策略：</strong>制定面向AI（而非人类）的传播策略。</li>
                     </ul>
                     <div class="comparison">
@@ -1940,8 +1909,8 @@
         </div>
     </div>
 
-    <!-- P13: 服务体系总览 -->
-    <div class="slide-container" id="slide-p13">
+    <!-- 实战示例：敏感肌修护精华 -->
+    <div class="slide-container" id="slide-practical-sensitive">
         <div class="slide-bg"></div>
         <!-- 右上角logo -->
         <div class="slide-logo">
@@ -1952,27 +1921,75 @@
                 <span class="brand-english">Seenify</span>
             </div>
         </div>
-        <h2 class="slide-title">服务体系总览</h2>
+        <style>
+          #slide-practical-sensitive .slide-title { font-size: 26px; }
+          #slide-practical-sensitive h3 { font-size: 22px; margin: 0 0 6px; }
+          #slide-practical-sensitive h4 { font-size: 18px; margin: 0 0 4px; }
+          #slide-practical-sensitive p, #slide-practical-sensitive li { font-size: 18px; line-height: 1.5; }
+          #slide-practical-sensitive .data-card { padding: 10px; }
+          /* 新布局样式 */
+          #slide-practical-sensitive .practical-layout { display: flex; gap: 12px; align-items: center; }
+          #slide-practical-sensitive .left-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1 1 620px; }
+          #slide-practical-sensitive .mid-arrow { flex: 0 0 64px; display: flex; align-items: center; justify-content: center; }
+          #slide-practical-sensitive .right-result { flex: 1 1 300px; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+          #slide-practical-sensitive .right-result h3 { font-size: 26px; }
+          #slide-practical-sensitive .right-result h4 { font-size: 20px; }
+          #slide-practical-sensitive .right-result p { font-size: 26px; }
+        </style>
+        <h2 class="slide-title">实战：某修护精华修正AI认知</h2>
         <div class="content-area">
-            <div class="three-column-layout">
-                <div>
-                    <div class="icon"><i class="fa-solid fa-users"></i></div>
-                    <h3>学习版 (Community)</h3>
-                    <p><strong>内容：</strong>Seenify工具基础版 + 公开课 + 社群</p>
-                    <p style="margin-top: auto; padding-top: 20px;"><strong>适用：</strong>想了解GEO的从业者、品牌主</p>
+            <div class="practical-layout">
+                <!-- 左侧：2x2 阶段网格 -->
+                <div class="left-grid">
+                    <div class="data-card" style="display:flex;flex-direction:column;gap:6px;">
+                        <h3>1. 追踪 —— 发现“隐形”</h3>
+                        <p>用户提问：<span class="hl-red">“敏感肌修护精华，成分要安全。”</span></p>
+                        <ul style="padding-left:20px;">
+                            <li>AI推荐：雅诗兰黛 / 修丽可 / 薇诺娜</li>
+                            <li>本品牌：未被提及（可见性 0%）</li>
+                        </ul>
+                    </div>
+                    <div class="data-card" style="display:flex;flex-direction:column;gap:6px;">
+                        <h3>2. 诊断 —— 查出“病因”</h3>
+                        <ul style="padding-left:20px;"> 
+                            <li>A诊断结论：<span class="hl-red">语义标签错位，缺乏“功效性”证据链。</span></li>
+                            <li>语义错位：被归类为“基础保湿”</li>
+                            <li>证据不足：缺少医生背书与临床数据</li>
+                        </ul>
+                    </div>
+                    <div class="data-card" style="display:flex;flex-direction:column;gap:6px;">
+                        <h3>3. 优化 —— 修正“逻辑”</h3>
+                        <ul style="padding-left:20px;">
+                            <li>心智策略：制定“成分党”对话策略，强调“<span class="hl-red">临床数据</span>”</li>
+                            <li>成分：高亮玻色因 / 神经酰胺</li>
+                            <li>策略：强调临床数据与功效</li>
+                        </ul>
+                    </div>
+                    <div class="data-card" style="display:flex;flex-direction:column;gap:6px;">
+                        <h3>4. 生成 —— 投喂“事实”</h3>
+                        <ul style="padding-left:20px;">
+                            <li>JSON-LD：28天临床数据（泛红 -35%）</li>
+                            <li>事实库：医生合作实体关联</li>
+                            <li>分发：AI高权重医疗问答源</li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- 专业版高亮 -->
-                <div>
-                    <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
-                    <h3>专业版 (Creator)</h3>
-                    <p><strong>内容：</strong>Seenify工具Plus + 专业报告 + 专家辅导</p>
-                    <p style="margin-top: auto; padding-top: 20px;"><strong>适用：</strong>个人品牌、KOL、自媒体</p>
+
+                <!-- 中间：指向右侧的箭头 -->
+                <div class="mid-arrow">
+                    <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
+                        <polygon points="8,40 8,16 40,28" fill="#fff" stroke="#9B78E9" stroke-width="5"/>
+                    </svg>
                 </div>
-                <div style="transform: scale(1.05); border: 2px solid var(--color-accent-purple);">
-                    <div class="icon"><i class="fa-solid fa-building"></i></div>
-                    <h3>企业版 (Enterprise)</h3>
-                    <p><strong>内容：</strong>全流程服务 + 定制内容矩阵 + 保障最终效果</p>
-                    <p style="margin-top: auto; padding-top: 20px;"><strong>适用：</strong>品牌方、机构客户</p>
+
+                <!-- 右侧：结果区域 -->
+                <div class="right-result">
+                    <h3>最终结果</h3>
+                    <div class="data-card" style="display:flex;flex-direction:column;gap:4px;">
+                        <p>可见性 <strong>0%->85%</strong></p>
+                        <p>理解分 <strong>3.2->4.8</strong></p>
+                    </div>
+                    <p style="margin-top:4px;">7天复测：AI开始主动推荐 <span class="hl-red">[本品牌]</span>，强调“泛红显著改善”。</p>
                 </div>
             </div>
         </div>
@@ -2003,8 +2020,8 @@
                     </div>
                 </div>
                 <div class="data-card" style="display: flex; flex-direction: column; gap: 12px;">
-                    <h3>💡 AI语义提示词策略制定</h3>
-                    <p><strong>蓝图设计：</strong>基于品牌价值、目标受众和主词，设计品牌提示词策略。</p>
+                    <h3>💡 AI语义提问词策略制定</h3>
+                    <p><strong>蓝图设计：</strong>基于品牌价值、目标受众和优化目标，设计品牌提问词策略。</p>
                     <div style="margin-top: auto; padding-top: 6px;">
                         <span class="emphasis"
                             style="background-color: rgba(99,102,241,0.15); padding: 6px 10px; border-radius: 6px;">策略文档</span>
@@ -2038,66 +2055,6 @@
 
             <!-- 底部单行总结 -->
             <!-- <p class="summary-line">这是一个从“知己知彼”到“言行一致”的专业旅程。我们不仅提升可见性，更确保 AI 为您精准代言。</p> -->
-        </div>
-    </div>
-
-    <!-- P14: 社群服务 -->
-    <div class="slide-container" id="slide-p14">
-        <div class="slide-bg"></div>
-        <!-- 右上角logo -->
-        <div class="slide-logo">
-            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
-            <div class="brand-name">
-                <span class="brand-chinese">犀帆</span>
-                <span class="brand-separator">|</span>
-                <span class="brand-english">Seenify</span>
-            </div>
-        </div>
-        <h2 class="slide-title">犀帆公益学习社群</h2>
-        <div class="content-area" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
-            <!-- 左侧内容区域 -->
-            <div style="display: flex; flex-direction: column;">
-                <p class="subtitle"
-                    style="margin-top: 0; margin-bottom: 30px; color: var(--color-accent-purple-light);">"懂AI，才能被AI推荐。"
-                </p>
-
-                <div class="grid-2x2-layout">
-                    <div>
-                        <div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                        <div>
-                            <h4 style="color: var(--color-text-primary);">GEO公开课</h4>
-                            <p>深入讲解AI推荐的底层逻辑。</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
-                        <div>
-                            <h4 style="color: var(--color-text-primary);">实战任务</h4>
-                            <p>导师带领，动手提升品牌AI可见性。</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="icon"><i class="fa-solid fa-user-group"></i></div>
-                        <div>
-                            <h4 style="color: var(--color-text-primary);">专家圆桌</h4>
-                            <p>对话AI平台在职工程师。</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="icon"><i class="fa-solid fa-gift"></i></div>
-                        <div>
-                            <h4 style="color: var(--color-text-primary);">内测权益</h4>
-                            <p>优先试用Seenify新功能。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 右侧图片区域 -->
-            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
-                <img src="社群.png" alt="GEO学习成长路径图"
-                    style="max-width: 100%; max-height: 400px; object-fit: contain; border-radius: 12px;">
-            </div>
         </div>
     </div>
 
@@ -2139,7 +2096,7 @@
                     <div class="icon"><i class="fa-solid fa-brain"></i></div>
                     <div>
                         <h3 style="border: none; padding: 0; margin-bottom: 5px;">更懂AI</h3>
-                        <p>技术驱动，团队拥有多年AI从业经验，了解<span class="hl-red">推荐逻辑</span>。</p>
+                        <p>坚信技术为王，团队拥有多年AI从业经验，了解底层<span class="hl-red">推荐逻辑</span>。</p>
                     </div>
                 </div>
                 <div>
@@ -2153,7 +2110,7 @@
                     <div class="icon"><i class="fa-solid fa-bolt"></i></div>
                     <div>
                         <h3 style="border: none; padding: 0; margin-bottom: 5px;">更高效</h3>
-                        <p><span class="hl-red">用AI生成AI友好内容</span>，规模化生产语义资产，降本增效。</p>
+                        <p><span class="hl-red">用AI技术生成AI友好内容</span>，规模化生产语义资产，降本增效。</p>
                     </div>
                 </div>
                 <div>
@@ -2190,7 +2147,7 @@
                 </div>
                 <div>
                     <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
-                    <h3>GEO专家</h3>
+                    <h3>可见性优化专家</h3>
                     <p>资深SEO/ASO顾问 + AI语义策略专家</p>
                     <p style="margin-top: 10px;">负责策略制定与优化执行。</p>
                 </div>
@@ -2203,6 +2160,265 @@
             </div>
         </div>
     </div>
+
+
+    <!-- CH5: 案例精选 (章节页) -->
+    <div class="slide-container" id="slide-ch5">
+        <div class="slide-bg"></div>
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <div class="chapter-layout">
+            <h2 class="chapter-title">五、案例精选</h2>
+            <p class="chapter-subtitle">真实项目与落地成效</p>
+        </div>
+        <div class="slide-footer"><span>Seenify</span><span>•</span><span>www.seenify.cn</span></div>
+    </div>
+
+   
+
+    <!-- Case 2: 领先猫粮（FMCG宠物食品） -->
+    <div class="slide-container" id="slide-case-2">
+        <div class="slide-bg"></div>
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">XX猫粮（中宠集团旗下）</h2>
+        <div class="content-area">
+            <div class="case-layout">
+                <div class="case-text">
+                    <h3>客户背景</h3>
+                    <p>XX猫粮为中宠集团旗下品牌，主打天然与科学配方，竞争激烈。</p>
+                    <h3 style="margin-top: 12px;">核心挑战【<span class="hl-red">可见</span>】【<span class="hl-red">理解</span>】【<span class="hl-red">偏好</span>】</h3>
+                    <p>声量小、消费者对“天然”理解模糊；需建立清晰偏好认知并激发真实推荐。</p>
+                    <h3 style="margin-top: 12px;">优化方案</h3>
+                    <ul>
+                        <li><strong>[可见]</strong> 监测竞品声量空白点，指导在“国产猫粮”、“烘焙猫粮”等赛道集中曝光。</li>
+                        <li><strong>[理解]</strong> 优化主打定位“无谷物”“低敏”等卖点是否准确被AI理解。</li>
+                        <li><strong>[偏好]</strong> 重点对比竞品，提升AI对该猫粮品牌的偏好。</li>
+                    </ul>
+                    <h3 style="margin-top: 12px;">关键成果</h3>
+                    <ul>
+                        <li>该猫粮在相关提问词下可见性提升180%。</li>
+                        <li>与竞品比对，推荐率提升60%。</li>
+                    </ul>
+                </div>
+                <div class="case-image">
+                    <img src="案例/领先_1.png" alt="案例图片：领先猫粮 1">
+                    <img src="案例/领先_2.png" alt="案例图片：领先猫粮 2">
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- Case 1: 车来了（港股上市公司） -->
+    <div class="slide-container" id="slide-case-1">
+        <div class="slide-bg"></div>
+        <!-- 右上角logo -->
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">元光科技（港股上市公司）</h2>
+        <div class="content-area">
+            <div class="case-layout">
+                <div class="case-text">
+                    <h3>客户背景</h3>
+                    <p>元光科技旗下产品“车来了”是国内领先的实时公交查询App（HK2605），服务数亿用户，数据依赖各地公交系统的实时数据源。</p>
+                    <h3 style="margin-top: 12px;">核心挑战【<span class="hl-red">信任</span>】【<span class="hl-red">偏好</span>】</h3>
+                    <p>用户无法区分是 App Bug 还是公交数据源错误，所有负面情绪指向App；需要快速响应并维护用户偏好。</p>
+                    <h3 style="margin-top: 12px;">优化方案</h3>
+                    <ul>
+                        <li><strong>[信任]</strong> 重点监测品牌情绪，实时监测“不准”“卡顿”“闪退”等瞬时口碑，在传统渠道之外，增加AI舆论监测渠道，重大故障预警从小时级缩短至分钟级。</li>
+                        <li><strong>[偏好]</strong> 语义分析自动归因（区分App问题或数据源问题）。</li>
+                    </ul>
+                    <h3 style="margin-top: 12px;">关键成果</h3>
+                    <ul>
+                        <li>重大数据服务故障预警时间缩短至10分钟内。</li>
+                        <li>多次数据源波动事件中，品牌信任度（正面情绪占比）提升 15%。</li>
+                    </ul>
+                </div>
+                <div class="case-image">
+                    <img src="案例/车来了.png" alt="案例图片：车来了">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Case 3: XX地方口腔医院（本地医疗服务） -->
+    <div class="slide-container" id="slide-case-3">
+        <div class="slide-bg"></div>
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">地方口腔医院（本地医疗服务）</h2>
+        <div class="content-area">
+            <div class="case-layout">
+                <div class="case-text">
+                    <h3>客户背景</h3>
+                    <p>区域性高端牙科诊所，高客单价，依赖本地高意向客户。</p>
+                    <h3 style="margin-top: 12px;">核心挑战【<span class="hl-red">可见</span>】【<span class="hl-red">推荐</span>】</h3>
+                    <p>用户只在有需求时搜索，必须在本地推荐中绝对优先；通过权威信息建立信任。</p>
+                    <h3 style="margin-top: 12px;">优化方案</h3>
+                    <ul>
+                        <li><strong>[可见]</strong> 基于 LBS 的本地搜索可见性优化，持续模拟不同区域搜索，确保区域推荐排名前三。</li>
+                        <li><strong>[推荐]</strong> 重点监测“医院电话”等关键信任信息在的露出率。</li>
+                    </ul>
+                    <h3 style="margin-top: 12px;">关键成果</h3>
+                    <ul>
+                        <li>本地核心医疗排名从第 15 位提升至第 2 位。</li>
+                        <li>“医院电话”露出率提高 400%，有效咨询电话比例65%。（客户提供数据）</li>
+                    </ul>
+                </div>
+                <div class="case-image">
+                    <img src="案例/未来口腔医院.png" alt="案例图片：未来口腔医院">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case 4: 拉美途（OTA在线旅游） -->
+    <div class="slide-container" id="slide-case-4">
+        <div class="slide-bg"></div>
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">拉美途（高端旅游）</h2>
+        <div class="content-area">
+            <div class="case-layout">
+                <div class="case-text">
+                    <h3>客户背景</h3>
+                    <p>专注高端拉美和极地旅行路线的 OTA，客单价高、决策周期长。</p>
+                    <h3 style="margin-top: 12px;">核心挑战【<span class="hl-red">可见</span>】【<span class="hl-red">理解</span>】</h3>
+                    <p>目标客群少、价格理解门槛高，需要大量深度内容辅助决策。</p>
+                    <h3 style="margin-top: 12px;">优化方案</h3>
+                    <ul>
+                        <li><strong>[可见]</strong> 部署长尾对话意图战略，挖掘数百个高转化提问词（如“厄瓜多尔自由行攻略”“南极签证和安全”）。</li>
+                        <li><strong>[理解]</strong> 分析对话意图背后的顾虑（安全、费用、定制灵活度），内容团队创作深度回答，树立专业形象。</li>
+                    </ul>
+                    <h3 style="margin-top: 12px;">关键成果</h3>
+                    <ul>
+                        <li>200+核心长尾提问优化。</li>
+                        <li>服务2个月咨询50+，成单4人（截止2025.11月），平均客单价14万/人。</li>
+                    </ul>
+                </div>
+                <div class="case-image">
+                    <img src="案例/拉美途_1.png" alt="案例图片：拉美途 1">
+                    <img src="案例/拉美途_2.png" alt="案例图片：拉美途 2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case 5: 金宝贝教培（教育培训） -->
+    <div class="slide-container" id="slide-case-5">
+        <div class="slide-bg"></div>
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">某宝贝教培（教育培训）</h2>
+        <div class="content-area">
+            <div class="case-layout">
+                <div class="case-text">
+                    <h3>客户背景</h3>
+                    <p>国际连锁早教机构，家长群体对口碑与品牌安全感极为敏感。</p>
+                    <h3 style="margin-top: 12px;">核心挑战【<span class="hl-red">信任</span>】【<span class="hl-red">推荐</span>】</h3>
+                    <p>行业信任脆弱，负面容易被放大；决策高度依赖其他家长的推荐与信任。</p>
+                    <h3 style="margin-top: 12px;">优化方案</h3>
+                    <ul>
+                        <li><strong>[信任]</strong> 7x24 监测AI负面情绪，在信任危机（如“安全”“退费”）发生时预警。</li>
+                        <li><strong>[推荐]</strong> 识别主流平台上真实好评，提炼“正面案例故事”，用于放大与二次传播。</li>
+                    </ul>
+                    <h3 style="margin-top: 12px;">关键成果</h3>
+                    <ul>
+                        <li>全平台品牌负面情绪提及占比下降 40%。</li>
+                        <li>各分中心“体验课预约”的线上转化率平均提升25%。（客户提供数据）</li>
+                    </ul>
+                </div>
+                <div class="case-image">
+                    <img src="案例/金宝贝.png" alt="案例图片：金宝贝">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case 6: 安澜应急（G2B/公共安全） -->
+    <div class="slide-container" id="slide-case-6">
+        <div class="slide-bg"></div>
+        <div class="slide-logo">
+            <img src="logo.png" alt="犀帆 Seenify Logo" class="brand-logo">
+            <div class="brand-name">
+                <span class="brand-chinese">犀帆</span>
+                <span class="brand-separator">|</span>
+                <span class="brand-english">Seenify</span>
+            </div>
+        </div>
+        <h2 class="slide-title">安澜应急（2B/2G业务）</h2>
+        <div class="content-area">
+            <div class="case-layout">
+                <div class="case-text">
+                    <h3>客户背景</h3>
+                    <p>智慧应急解决方案提供商，客户为政府机构，业务依赖权威性与过往案例。</p>
+                    <h3 style="margin-top: 12px;">核心挑战【<span class="hl-red">信任</span>】【<span class="hl-red">偏好</span>】</h3>
+                    <p>项目常由总包方中标而实际执行方为安澜，易造成品牌归功错位，证据链断裂。</p>
+                    <h3 style="margin-top: 12px;">优化方案</h3>
+                    <ul>
+                        <li><strong>[信任]</strong> 重点监测.gov.cn、官方媒体、行业协会网站的品牌露出，绑定“权威认证”“政府标准”。</li>
+                        <li><strong>[偏好-证据链]</strong> AI 跨库关联：抓取中标公告→搜索后续报道与实施方案→挖掘“安澜提供核心技术/团队入驻”等关联证据。</li>
+                    </ul>
+                    <h3 style="margin-top: 12px;">关键成果</h3>
+                    <ul>
+                        <li>构建15个“间接项目”的权威证据链。</li>
+                        <li>官网与权威认证页面在引用源中占比提升至65%，显著增强政府端客户信任。</li>
+                    </ul>
+                </div>
+                <div class="case-image">
+                    <img src="案例/安澜应急.png" alt="案例图片：安澜应急">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compact style adjustments for case slides to prevent overflow -->
+    <style>
+      .slide-container[id^="slide-case-"] .slide-title { font-size: 28px; }
+      .slide-container[id^="slide-case-"] .case-layout { gap: 16px; }
+      .slide-container[id^="slide-case-"] .case-text h3 { font-size: 18px; margin: 8px 0; }
+      .slide-container[id^="slide-case-"] .case-text p { font-size: 14px; line-height: 1.5; margin: 4px 0; }
+      .slide-container[id^="slide-case-"] .case-text ul { margin: 6px 0; padding-left: 18px; }
+      .slide-container[id^="slide-case-"] .case-text li { font-size: 14px; line-height: 1.5; margin: 4px 0; }
+      .slide-container[id^="slide-case-"] .case-image { display: flex; flex-direction: column; gap: 8px; }
+      .slide-container[id^="slide-case-"] .case-image img { width: 100%; height: auto; border-radius: 6px; }
+    </style>
 
 
 
